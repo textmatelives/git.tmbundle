@@ -1,6 +1,6 @@
 class String
   def constantize
-    Object.module_eval("::" + self)
+    Object.const_get(self)
   end
   
   def underscore
