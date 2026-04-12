@@ -1,13 +1,13 @@
-require File.dirname(__FILE__) + '/../../spec_helper'
+require File.dirname(__FILE__) + '/../../test_helper'
 
-describe Git do
-  before(:each) do
+class TestMergeParsing < Test::Unit::TestCase
+  include TestHelpers
+
+  def setup
     @merge = Git.new
   end
-  
-  include SpecHelpers
-  
-  it "should extract conflicts from a merge" do
+
+  def test_should_extract_conflicts_from_a_merge
     result = @merge.parse_merge(<<-EOF)
 Auto-merged project.txt
 CONFLICT (content): Merge conflict in project.txt
@@ -19,7 +19,6 @@ CONFLICT (delete/modify): coso.txt deleted in release and modified in HEAD. Vers
 Automatic merge failed; fix conflicts and then commit the result.
 Automatic merge failed; fix conflicts and then commit the result.
 EOF
-    # puts result.inspect
-    result[:conflicts].should == ["project.txt", "dude.txt", "lib/file.rb", "coso.txt"]
+    assert_equal ["project.txt", "dude.txt", "lib/file.rb", "coso.txt"], result[:conflicts]
   end
 end
