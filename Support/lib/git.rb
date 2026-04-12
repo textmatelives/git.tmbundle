@@ -47,7 +47,7 @@ module SCM
     end
 
     def command_str(*args)
-      str = %{unset DISPLAY && cd "#{path}" && #{e_sh git} #{args.map{ |arg| e_sh(arg) } * ' '}}
+      str = %{unset DISPLAY && cd "#{path}" && #{e_sh git} #{args.flatten.map{ |arg| e_sh(arg) } * ' '}}
       logger.error(str) if debug_mode
       str
     end
