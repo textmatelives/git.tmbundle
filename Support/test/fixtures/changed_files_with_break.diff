@@ -10,7 +10,7 @@ index c65fcef..98bef86 100644
  <dict>
  	<key>beforeRunningCommand</key>
 @@ -8,10 +8,9 @@
- 	<string>#!/usr/bin/env ruby -wKU
+ 	<string>#!/usr/bin/env ruby -wEutf-8
  
  require ENV['TM_BUNDLE_SUPPORT'] + '/lib/git.rb'
 -require ENV['TM_SUPPORT_PATH'] + '/lib/escape.rb'
