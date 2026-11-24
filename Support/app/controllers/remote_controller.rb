@@ -59,7 +59,7 @@ class RemoteController < ApplicationController
       
       with_submodule_updating do
         output = run_pull(remote_name, remote_branch_name)
-        puts "<pre>#{output[:text]}</pre>"
+        puts "<pre>#{LinkURLs.linkify(htmlize(output[:text]))}</pre>"
       
         if ! output[:pulls].empty?
           puts("<h2>Log of changes pulled</h2>")
@@ -125,16 +125,16 @@ class RemoteController < ApplicationController
       flush
       sleep(0.2) # this small delay prevents TextMate from garbling the HTML
       if ! output[:pushes].empty?
-        puts "<pre>#{output[:text]}</pre>"
+        puts "<pre>#{LinkURLs.linkify(htmlize(output[:text]))}</pre>"
         output_branch_logs(git, output[:pushes])
         flush
       elsif output[:nothing_to_push]
         puts "Nothing to push."
-        puts "<pre>#{output[:text]}</pre><br/>"
+        puts "<pre>#{LinkURLs.linkify(htmlize(output[:text]))}</pre><br/>"
         flush
       else
         puts "<h3>Output:</h3>"
-        puts "<pre>#{output[:text]}</pre>"
+        puts "<pre>#{LinkURLs.linkify(htmlize(output[:text]))}</pre>"
         flush
       end
     end
